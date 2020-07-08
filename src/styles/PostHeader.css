@@ -1,0 +1,11 @@
+@import '../styles/Fonts.css';
+
+.profile-pic {
+    object-fit: cover;
+    height: 40px;
+    width: 40px;
+}
+
+.profile-name {
+    font-weight: var(--bold);
+}
