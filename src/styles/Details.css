@@ -1,0 +1,18 @@
+@import './Fonts.css';
+
+.semi-bold {
+    font-weight: var(--semibold);
+}
+
+.hashtag {
+    color: #4C82B2;
+}
+
+.row-spacing-custom {
+    margin-bottom: 0;
+}
+
+.timestamp {
+    font-size: 12px;
+    opacity: 70%;
+}
