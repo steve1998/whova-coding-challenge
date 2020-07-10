@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 // Components
 import PostHeader from '../components/PostHeader'
 import PostBar from '../components/PostBar'
-import Details from '../components/Details'
+import GetComments from '../containers/GetComments'
 import Comment from '../components/Comment'
 
 // Assets
@@ -22,7 +22,7 @@ const Post = () => {
     }, [])
 
     const handleWindowResize = () => {
-        if(window.innerWidth > 1000) {
+        if(window.innerWidth > 800) {
             setIsMobile(false)
         } else {
             setIsMobile(true)
@@ -35,12 +35,12 @@ const Post = () => {
                 <div>
                     <PostHeader />
                 </div>
-                <div className="flex-grow-1">
-                    <img src={post} className="w-100"></img>
+                <div className="d-flex flex-grow-1 image-container">
+                    <img src={post} className="w-100 image"></img>
                 </div>
                 <div className="px-3 pt-2">
                     <PostBar />
-                    <Details />
+                    <GetComments />
                 </div>
                 <div className="comment">
                     <hr></hr>
@@ -52,8 +52,8 @@ const Post = () => {
         ) : (
             <div className="viewheight">
                 <div className="row no-gutters h-100">
-                    <div className="col-8 justify-content-center">
-                        <img src={post} className="w-100"></img>
+                    <div className="col-8 d-flex">
+                        <img src={post} className="w-100 image"></img>
                     </div>
                     <div className="col-4 d-flex flex-column">
                         <div className="px-3">
@@ -62,7 +62,7 @@ const Post = () => {
                         <hr></hr>
                         <div className="pt-2 flex-grow-1">
                             <div className="px-3">
-                                <Details />
+                                <GetComments />
                             </div>
                             
                         </div>
