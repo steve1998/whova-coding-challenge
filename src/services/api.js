@@ -9,5 +9,10 @@ export const retrieveFromStorage = () => {
 }
 
 export const getNumberofItemsinStorage = () => {
-    return localStorage.length
+    let commentList = JSON.parse(localStorage.getItem('comments'))
+    if(commentList === null) {
+        return 0
+    } else {
+        return commentList.length
+    }
 }
