@@ -6,6 +6,9 @@ import PostBar from '../components/PostBar'
 import GetComments from '../containers/GetComments'
 import Comment from '../components/Comment'
 
+// Helpers
+import { checkWindowSize } from '../helpers/dom'
+
 // Assets
 import post from '../assets/post.jpg'
 
@@ -20,11 +23,7 @@ const Post = () => {
     })
 
     const handleWindowResize = () => {
-        if(window.innerWidth > 760) {
-            setIsMobile(false)
-        } else {
-            setIsMobile(true)
-        }
+        setIsMobile(checkWindowSize())
     }
 
     return(

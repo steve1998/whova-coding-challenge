@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addComment } from '../actions/comments'
 
-import '../styles/Comment.css'
-
 const Comment = ({ dispatch }) => {
     const[comment, setComment] = useState(undefined)
 
