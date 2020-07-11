@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import '../styles/PostBar.css'
+import '../styles/PostBar.scss'
 
 const PostBar = () => {
     const[IsLiked, setIsLiked] = useState(false)

@@ -13,7 +13,7 @@ import { checkWindowSize } from '../helpers/dom'
 import post from '../assets/post.jpg'
 
 // Styles
-import '../styles/Post.css'
+import '../styles/Post.scss'
 
 const Post = () => {
     const[isMobile, setIsMobile] = useState(false)
