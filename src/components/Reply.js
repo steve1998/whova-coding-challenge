@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import '../styles/Reply.scss'
+
 const Reply = (props) => {
     const[reply, setReply] = useState(undefined)
 
@@ -13,9 +15,9 @@ const Reply = (props) => {
     }
 
     return(
-        <div className="d-flex flex-row justify-content-between">
+        <div className="d-flex flex-row reply-row justify-content-between">
             <input id="postReply" type="text" className="form-control border-0" placeholder="Add a reply..." onChange={handleReplyChanged}></input>
-            <button type="button" className="btn btn-outline-primary border-0" onClick={handlePost}>Post</button>
+            <button type="button" className="btn btn-outline-primary border-0" onClick={handlePost}>Reply</button>
         </div>
     )
 }

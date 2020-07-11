@@ -3,12 +3,13 @@ import Reply from './Reply'
 
 import { retrieveFromStorage, saveToStorage } from '../services/api'
 
-import '../styles/Details.css'
+import '../styles/Details.scss'
 
 const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment, likeReply, unlikeReply }) => {
     const[currentHour, setCurrentHour] = useState(undefined)
     const[currentComments, setCurrentComments] = useState([])
     const[replyBox, setReplyBox] = useState(false)
+    const[replyBoxId, setReplyBoxId] = useState(null)
 
     useEffect(() => {
         if(comments.length == 0) {
@@ -46,11 +47,17 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
         unlikeReply(commentId, replyId)
     }
 
-    const handleReply = () => {
+    const handleReply = id => {
         if(replyBox) {
-            setReplyBox(false)
+            if(replyBoxId != id) {
+                setReplyBoxId(id)
+            } else {
+                setReplyBox(false)
+                setReplyBoxId(null)
+            }
         } else {
             setReplyBox(true)
+            setReplyBoxId(id)
         }
     }
     
@@ -70,7 +77,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                             <div>
                                 <div className="d-flex flex-row row-spacing-custom justify-content-between">
                                     <p className="commenter">
-                                        <span className="semi-bold pr-2">testcommenter</span>  
+                                        <span className="semi-bold pr-2">nicholassteven998</span>  
                                         <span>{comment.text}</span>
                                     </p> 
                                     <div>
@@ -94,7 +101,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                                 return(
                                                     <div className="pl-3 py-2 d-flex flex-row justify-content-between">
                                                         <p className="commenter">
-                                                            <span className="semi-bold pr-2">testcommenter</span>  
+                                                            <span className="semi-bold pr-2">nicholassteven998</span>  
                                                             <span>{reply.text}</span>
                                                         </p> 
                                                         <div>
@@ -123,12 +130,12 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                             currentHour - comment.time < 1 ? (<span>Just now</span>) : (currentHour - comment.time + "h")
                                         }
                                         </span>
-                                        <span onClick={handleReply} className="semi-bold reply-button">Reply</span>
+                                        <span onClick={() => handleReply(comment.id)} className="semi-bold reply-button">Reply</span>
                                     </p>
                                 </div>
                                 <div>
                                     {
-                                        replyBox ? (<Reply reply={handleReply} dispatchReply={addReply} commentId={comment.id}/>) : null
+                                        replyBox && replyBoxId === comment.id ? (<Reply reply={handleReply} dispatchReply={addReply} commentId={comment.id}/>) : null
                                     }
                                 </div>
                             </div>

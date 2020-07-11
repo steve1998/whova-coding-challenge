@@ -1,0 +1,42 @@
+@import './styles/Colors.scss';
+
+$theme-colors: (
+  "primary": $primary-color
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import './styles/Fonts.css';
+
+html, body {
+  font-family: var(--font-family);
+  height: 100%;
+}
+
+.btn-outline-primary:hover {
+  background-color: white !important;
+  color: $primary-color !important;
+}
+
+.bi-heart-fill {
+  color: $like-color;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    box-shadow: none !important;
+}

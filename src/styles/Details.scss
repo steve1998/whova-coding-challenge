@@ -1,3 +1,4 @@
+@import '../styles/Colors.scss';
 @import './Fonts.css';
 
 .semi-bold {
@@ -5,7 +6,7 @@
 }
 
 .hashtag {
-    color: #4C82B2;
+    color: $hashtag-color;
 }
 
 .row-spacing-custom {
@@ -13,7 +14,7 @@
 }
 
 .details-section {
-    max-height: 60vh;
+    max-height: 63vh;
     overflow-y: auto;
 }
 
