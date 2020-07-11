@@ -1,11 +1,8 @@
-import { getNumberofItemsinStorage } from '../services/api'
-
-let commentId = getNumberofItemsinStorage()
-console.log(commentId)
+import { generateRandomString } from '../helpers/IdGenerator'
 
 export const addComment = text => ({
     type: 'ADD_COMMENT',
-    id: ++commentId,
+    id: generateRandomString(),
     text
 })
 
@@ -22,4 +19,23 @@ export const likeComment = id => ({
 export const unlikeComment = id => ({
     type: 'UNLIKE_COMMENT',
     id: id
+})
+
+export const addReply = (text, id) => ({
+    type: 'ADD_REPLY',
+    commentId: id,
+    replyId: generateRandomString(),
+    text
+})
+
+export const likeReply = (commentId, replyId) => ({
+    type: 'LIKE_REPLY',
+    commentId,
+    replyId
+})
+
+export const unlikeReply = (commentId, replyId) => ({
+    type: 'UNLIKE_REPLY',
+    commentId,
+    replyId
 })

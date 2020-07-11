@@ -31,6 +31,14 @@
     opacity: 70%;
 }
 
+.reply-button {
+    cursor: pointer;
+}
+
+.like {
+    cursor: pointer;
+}
+
 @media(max-width: 800px) {
     .details-section {
         max-height: 10vh;

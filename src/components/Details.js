@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import Reply from './Reply'
 
 import { retrieveFromStorage, saveToStorage } from '../services/api'
 
 import '../styles/Details.css'
-import { fetchComments, likeComment, unlikeComment } from '../actions/comments'
 
-const Details = ({ comments, dispatch }) => {
+const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment, likeReply, unlikeReply }) => {
     const[currentHour, setCurrentHour] = useState(undefined)
     const[currentComments, setCurrentComments] = useState([])
+    const[replyBox, setReplyBox] = useState(false)
 
     useEffect(() => {
         if(comments.length == 0) {
@@ -16,7 +17,7 @@ const Details = ({ comments, dispatch }) => {
             } else {
                 let commentFromStorage = retrieveFromStorage()
                 setCurrentComments(commentFromStorage)
-                dispatch(fetchComments(commentFromStorage))
+                fetchComments(commentFromStorage)
             }
         } else {
             setCurrentComments(comments)
@@ -28,13 +29,29 @@ const Details = ({ comments, dispatch }) => {
         setCurrentHour(date.getHours())
     }, [comments])
 
+    // Event Handlers
     const handleLike = id => {
-        console.log(id)
-        dispatch(likeComment(id))
+        likeComment(id)
     }
 
     const handleUnlike = id => {
-        dispatch(unlikeComment(id))
+        unlikeComment(id)
+    }
+
+    const handleLikeReply = (commentId, replyId) => {
+        likeReply(commentId, replyId)
+    }
+
+    const handleUnlikeReply = (commentId, replyId) => {
+        unlikeReply(commentId, replyId)
+    }
+
+    const handleReply = () => {
+        if(replyBox) {
+            setReplyBox(false)
+        } else {
+            setReplyBox(true)
+        }
     }
     
     return(
@@ -59,16 +76,45 @@ const Details = ({ comments, dispatch }) => {
                                     <div>
                                         {
                                             comment.liked ? (
-                                                <svg onClick={() => handleUnlike(comment.id)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart-fill mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <svg onClick={() => handleUnlike(comment.id)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart-fill mr-3 like" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                                                 </svg>
                                             ) : (
-                                                <svg onClick={() => handleLike(comment.id)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <svg onClick={() => handleLike(comment.id)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart mr-3 like" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fillRule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                                                 </svg>
                                             )
                                         }
                                     </div>
+                                </div>
+                                <div>
+                                    {
+                                        comment.replies ? (
+                                            comment.replies.map(reply => {
+                                                return(
+                                                    <div className="pl-3 py-2 d-flex flex-row justify-content-between">
+                                                        <p className="commenter">
+                                                            <span className="semi-bold pr-2">testcommenter</span>  
+                                                            <span>{reply.text}</span>
+                                                        </p> 
+                                                        <div>
+                                                            {
+                                                                reply.liked ? (
+                                                                    <svg onClick={() => handleUnlikeReply(comment.id, reply.replyId)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart-fill mr-3 like" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                                    </svg>
+                                                                ) : (
+                                                                    <svg onClick={() => handleLikeReply(comment.id, reply.replyId)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart mr-3 like" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fillRule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                                                    </svg>
+                                                                )
+                                                            }
+                                                        </div>
+                                                    </div> 
+                                                )
+                                            })
+                                        ) : null   
+                                    }
                                 </div>
                                 <div>
                                     <p className="reply">
@@ -77,8 +123,13 @@ const Details = ({ comments, dispatch }) => {
                                             currentHour - comment.time < 1 ? (<span>Just now</span>) : (currentHour - comment.time + "h")
                                         }
                                         </span>
-                                        <span className="semi-bold">Reply</span>
+                                        <span onClick={handleReply} className="semi-bold reply-button">Reply</span>
                                     </p>
+                                </div>
+                                <div>
+                                    {
+                                        replyBox ? (<Reply reply={handleReply} dispatchReply={addReply} commentId={comment.id}/>) : null
+                                    }
                                 </div>
                             </div>
                             

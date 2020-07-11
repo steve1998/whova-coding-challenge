@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 // Components
 import PostHeader from '../components/PostHeader'
@@ -11,8 +11,6 @@ import post from '../assets/post.jpg'
 
 // Styles
 import '../styles/Post.css'
-
-
 
 const Post = () => {
     const[isMobile, setIsMobile] = useState(false)
