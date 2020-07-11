@@ -1,4 +1,4 @@
-import { generateRandomString } from '../helpers/IdGenerator'
+import { generateRandomString } from '../helpers/idGenerator'
 
 export const addComment = text => ({
     type: 'ADD_COMMENT',
