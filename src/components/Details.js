@@ -12,7 +12,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
     const[replyBoxId, setReplyBoxId] = useState(null)
 
     useEffect(() => {
-        if(comments.length == 0) {
+        if(comments.length === 0) {
             if(retrieveFromStorage() == null) {
                 setCurrentComments([])
             } else {
@@ -28,7 +28,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
 
         let date = new Date()
         setCurrentHour(date.getHours())
-    }, [comments])
+    }, [comments, fetchComments])
 
     // Event Handlers
     const handleLike = id => {
@@ -49,7 +49,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
 
     const handleReply = id => {
         if(replyBox) {
-            if(replyBoxId != id) {
+            if(replyBoxId !== id) {
                 setReplyBoxId(id)
             } else {
                 setReplyBox(false)
@@ -74,7 +74,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                 {                        
                     currentComments.map(comment => {
                         return(
-                            <div>
+                            <div key={comment.id}>
                                 <div className="d-flex flex-row row-spacing-custom justify-content-between">
                                     <p className="commenter">
                                         <span className="semi-bold pr-2">nicholassteven998</span>  
@@ -97,9 +97,9 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                 <div>
                                     {
                                         comment.replies ? (
-                                            comment.replies.map(reply => {
+                                            comment.replies.map((reply, index) => {
                                                 return(
-                                                    <div className="pl-3 py-2 d-flex flex-row justify-content-between">
+                                                    <div key={index} className="pl-3 py-2 d-flex flex-row justify-content-between">
                                                         <p className="commenter">
                                                             <span className="semi-bold pr-2">nicholassteven998</span>  
                                                             <span>{reply.text}</span>

@@ -9,7 +9,7 @@ const PostHeader = () => {
         <nav className="navbar d-flex flex-row justify-content-between">
             <div className="row pl-2 justify-content-start align-items-center">
                 <div>
-                    <img src={profilepic} className="rounded-circle mr-3 profile-pic"></img>
+                    <img src={profilepic} alt="" className="rounded-circle mr-3 profile-pic"></img>
                 </div>
                 <div className="d-flex flex-column">
                     <span className="profile-name">nicholassteven998</span>

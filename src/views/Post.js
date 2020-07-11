@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Components
 import PostHeader from '../components/PostHeader'
@@ -17,10 +17,10 @@ const Post = () => {
 
     useEffect(() => {
         window.addEventListener("resize", handleWindowResize)
-    }, [])
+    })
 
     const handleWindowResize = () => {
-        if(window.innerWidth > 800) {
+        if(window.innerWidth > 760) {
             setIsMobile(false)
         } else {
             setIsMobile(true)
@@ -34,7 +34,7 @@ const Post = () => {
                     <PostHeader />
                 </div>
                 <div className="d-flex flex-grow-1 image-container">
-                    <img src={post} className="w-100 image"></img>
+                    <img src={post} alt="" className="w-100 image"></img>
                 </div>
                 <div className="px-3 pt-2">
                     <PostBar />
@@ -51,7 +51,7 @@ const Post = () => {
             <div className="viewheight">
                 <div className="row no-gutters h-100">
                     <div className="col-8 d-flex">
-                        <img src={post} className="w-100 image"></img>
+                        <img src={post} alt="" className="w-100 image"></img>
                     </div>
                     <div className="col-4 d-flex flex-column">
                         <div className="px-3">
@@ -62,7 +62,6 @@ const Post = () => {
                             <div className="px-3">
                                 <GetComments />
                             </div>
-                            
                         </div>
                         <div className="pb-2 comment">
                             <div className="px-3">

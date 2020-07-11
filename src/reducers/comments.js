@@ -18,7 +18,7 @@ const comments = (state = [], action) => {
             return action.comments
         case 'LIKE_COMMENT':
             return state.map(comment => {
-                if (comment.id == action.id) {
+                if (comment.id === action.id) {
                     return {
                         ...comment,
                         liked: true
@@ -28,7 +28,7 @@ const comments = (state = [], action) => {
             })
         case 'UNLIKE_COMMENT':
             return state.map(comment => {
-                if (comment.id == action.id) {
+                if (comment.id === action.id) {
                     return {
                         ...comment,
                         liked: false
@@ -38,7 +38,7 @@ const comments = (state = [], action) => {
             })
         case 'ADD_REPLY':
             return state.map(comment => {
-                if (comment.id == action.commentId) {
+                if (comment.id === action.commentId) {
                     if (comment.replies === undefined) {
                         return {
                             ...comment,
@@ -68,7 +68,7 @@ const comments = (state = [], action) => {
             })
         case 'LIKE_REPLY':
             return state.map(comment => {
-                if (comment.id == action.commentId) {
+                if (comment.id === action.commentId) {
                     return {
                         ...comment,
                         replies: filterReply(comment.replies, action.replyId, true)
@@ -78,7 +78,7 @@ const comments = (state = [], action) => {
             })
         case 'UNLIKE_REPLY':
             return state.map(comment => {
-                if (comment.id == action.commentId) {
+                if (comment.id === action.commentId) {
                     return {
                         ...comment,
                         replies: filterReply(comment.replies, action.replyId, false)
