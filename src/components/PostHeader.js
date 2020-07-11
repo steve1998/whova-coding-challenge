@@ -2,7 +2,7 @@ import React from 'react'
 
 import profilepic from '../assets/profilepic.jpg'
 
-import '../styles/PostHeader.css'
+import '../styles/PostHeader.scss'
 
 const PostHeader = () => {
     return(

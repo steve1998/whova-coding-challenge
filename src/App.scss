@@ -5,10 +5,10 @@ $theme-colors: (
 );
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import './styles/Fonts.css';
+@import './styles/Fonts.scss';
 
 html, body {
-  font-family: var(--font-family);
+  font-family: $font-family;
   height: 100%;
 }
 

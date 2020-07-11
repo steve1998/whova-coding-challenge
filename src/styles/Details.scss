@@ -1,8 +1,8 @@
 @import '../styles/Colors.scss';
-@import './Fonts.css';
+@import './Fonts.scss';
 
 .semi-bold {
-    font-weight: var(--semibold);
+    font-weight: $semibold;
 }
 
 .hashtag {

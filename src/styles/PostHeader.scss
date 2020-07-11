@@ -1,4 +1,4 @@
-@import '../styles/Fonts.css';
+@import '../styles/Fonts.scss';
 
 .profile-pic {
     object-fit: cover;
@@ -7,5 +7,5 @@
 }
 
 .profile-name {
-    font-weight: var(--bold);
+    font-weight: $bold;
 }
