@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 
+
+// Styles
 import '../styles/PostBar.scss'
 
 const PostBar = () => {
     const[IsLiked, setIsLiked] = useState(false)
 
+    // Event handler for the post like button (like button does not change data)
     const handleLikeClicked = () => {
         if(!IsLiked) {
             setIsLiked(true)
@@ -15,8 +18,10 @@ const PostBar = () => {
 
     return(
         <div className="bar d-flex flex-row align-items-center justify-content-between pb-2">
+            {/* Renders the logos for the bar above comments */}
             <div>
                 {
+                    // Changes logo based on whether liked button is clicked or not
                     IsLiked ? (
                         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" onClick={handleLikeClicked} className="bi bi-heart-fill mr-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>

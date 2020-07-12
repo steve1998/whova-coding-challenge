@@ -1,6 +1,7 @@
 import { filterReply } from '../helpers/filter'
 import { getDate } from '../helpers/date'
 
+// Description of the reducers are in the actions file
 const comments = (state = [], action) => {
     switch(action.type) {
         case 'ADD_COMMENT':

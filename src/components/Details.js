@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from 'react'
+
+// Components
 import Reply from './Reply'
 
+// Services
 import { retrieveFromStorage, saveToStorage } from '../services/api'
 
+// Helpers
+import { getDate } from '../helpers/date'
+
+// Styles
 import '../styles/Details.scss'
 
 const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment, likeReply, unlikeReply }) => {
-    const[currentHour, setCurrentHour] = useState(undefined)
-    const[currentComments, setCurrentComments] = useState([])
-    const[replyBox, setReplyBox] = useState(false)
-    const[replyBoxId, setReplyBoxId] = useState(null)
+    const[currentHour, setCurrentHour] = useState(undefined) // state of current time in hours
+    const[currentComments, setCurrentComments] = useState([]) // array of comments to be rendered
+    const[replyBox, setReplyBox] = useState(false) // state of visibility of the reply box
+    const[replyBoxId, setReplyBoxId] = useState(null) // state of which reply row box is clicked
 
     useEffect(() => {
-        if(comments.length === 0) {
+        /*
+            Checks if comment state exists. If state is an empty array (most likely first time loading page),
+            fetches data from the localStorage and populates state. If it exists, populates local state from 
+            redux state and updates the localStorage with the most recently updated data.
+        */
+        if (comments.length === 0) {
             if(retrieveFromStorage() == null) {
                 setCurrentComments([])
             } else {
@@ -26,27 +38,32 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
             saveToStorage(comments)
         }
 
-        let date = new Date()
-        setCurrentHour(date.getHours())
+        setCurrentHour(getDate())
     }, [comments, fetchComments])
 
     // Event Handlers
+
+    // Handles like button pressed
     const handleLike = id => {
         likeComment(id)
     }
 
+    // Handles like button pressed (for unlike)
     const handleUnlike = id => {
         unlikeComment(id)
     }
 
+    // Handles like button pressed on a replied comment
     const handleLikeReply = (commentId, replyId) => {
         likeReply(commentId, replyId)
     }
 
+    // Handles like button pressed on a replied comment (for unlike)
     const handleUnlikeReply = (commentId, replyId) => {
         unlikeReply(commentId, replyId)
     }
 
+    // Handles if reply button is pressed
     const handleReply = id => {
         if(replyBox) {
             if(replyBoxId !== id) {
@@ -63,7 +80,9 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
     
     return(
         <div>
+            {/* Hard-coded likes for comment */}
             <p className="semi-bold row-spacing-custom">54 likes</p>
+            {/* Hard-coded caption */}
             <div className="d-flex flex-row row-spacing-custom">
                 <p>
                     <span className="semi-bold pr-2">nicholassteven998</span>
@@ -71,17 +90,20 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                 </p>   
             </div>  
             <div className="details-section">
-                {                        
+                {               
+                    // Maps the comments with each component         
                     currentComments.map(comment => {
                         return(
                             <div key={comment.id}>
                                 <div className="d-flex flex-row row-spacing-custom justify-content-between">
                                     <p className="commenter">
+                                        {/* Hard-coded commenter username */}
                                         <span className="semi-bold pr-2">nicholassteven998</span>  
                                         <span>{comment.text}</span>
                                     </p> 
                                     <div>
                                         {
+                                            // If comment is liked or unliked, display the correct icon
                                             comment.liked ? (
                                                 <svg onClick={() => handleUnlike(comment.id)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart-fill mr-3 like" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -101,11 +123,13 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                                 return(
                                                     <div key={index} className="pl-3 py-2 d-flex flex-row justify-content-between">
                                                         <p className="commenter">
+                                                            {/* Hard-coded commenter username */}
                                                             <span className="semi-bold pr-2">nicholassteven998</span>  
                                                             <span>{reply.text}</span>
                                                         </p> 
                                                         <div>
                                                             {
+                                                                // If comment reply is liked or unliked, display the correct icon
                                                                 reply.liked ? (
                                                                     <svg onClick={() => handleUnlikeReply(comment.id, reply.replyId)} width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-heart-fill mr-3 like" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                                         <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -127,6 +151,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                     <p className="reply">
                                         <span className="pr-2">
                                         {
+                                            // Calculates the timestamp of each comment
                                             currentHour - comment.time < 1 ? (<span>Just now</span>) : (currentHour - comment.time + "h")
                                         }
                                         </span>
@@ -135,6 +160,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                 </div>
                                 <div>
                                     {
+                                        // Displays the reply box for the selected comment
                                         replyBox && replyBoxId === comment.id ? (<Reply reply={handleReply} dispatchReply={addReply} commentId={comment.id}/>) : null
                                     }
                                 </div>
@@ -144,6 +170,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                     })
                 }
             </div> 
+            {/* Hard-coded timestamp for comment */}
             <div className="timestamp row-spacing-custom">
                 <p>14 hours ago</p>
             </div>

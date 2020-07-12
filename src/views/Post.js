@@ -1,3 +1,22 @@
+/*
+    This is a view container for a single post.
+    The design choice for this is to have a single container to contain all
+    the individual components of a post. The components are as follows:
+
+    - The image itself
+    - The user profile bar on top (not interactive)
+    - The interactive comment section
+    - The like, commment, upload, and bookmark bar (not interactive)
+    - The comment input section
+    - A reply input section (Reply works by adding a reusable component in the
+        interactive comment section)
+
+    The interactive comment section is also encapsulated in a redux container
+    that connects with the actions and reducers.
+
+    The mobile view for this is under 760 px screen width.
+*/
+
 import React, { useState, useEffect } from 'react'
 
 // Components
@@ -22,12 +41,14 @@ const Post = () => {
         window.addEventListener("resize", handleWindowResize)
     })
 
+    // Provides adaptive resizing for the window size
     const handleWindowResize = () => {
         setIsMobile(checkWindowSize())
     }
 
     return(
         isMobile ? (
+            // Mobile view
             <div className="d-flex flex-column justify-content-center viewheight">
                 <div>
                     <PostHeader />
@@ -37,6 +58,7 @@ const Post = () => {
                 </div>
                 <div className="px-3 pt-2">
                     <PostBar />
+                     {/* This is the redux container */}
                     <GetComments />
                 </div>
                 <div className="comment">
@@ -47,6 +69,7 @@ const Post = () => {
                 </div>
             </div>
         ) : (
+            // Desktop / Tablet view
             <div className="viewheight">
                 <div className="row no-gutters h-100">
                     <div className="col-8 d-flex">
@@ -59,6 +82,7 @@ const Post = () => {
                         <hr></hr>
                         <div className="pt-2 flex-grow-1">
                             <div className="px-3">
+                                {/* This is the redux container */}
                                 <GetComments />
                             </div>
                         </div>
@@ -73,10 +97,8 @@ const Post = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            
-        )
-        
+            </div> 
+        )   
     )
 }
 

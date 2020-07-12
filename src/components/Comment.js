@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
-
 import { connect } from 'react-redux'
+
+// Actions
 import { addComment } from '../actions/comments'
 
 const Comment = ({ dispatch }) => {
     const[comment, setComment] = useState(undefined)
 
+    // Event handler
+
+    // Handles input change for comment
     const handleCommentChange = (event) => {
         setComment(event.target.value)
     }
 
+    // Handles if post button is clicked
     const handlePost = () => {
         dispatch(addComment(comment))
         document.getElementById('postComment').value = ''

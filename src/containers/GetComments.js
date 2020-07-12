@@ -2,13 +2,14 @@ import { connect } from 'react-redux'
 import Details from '../components/Details'
 import { addReply, fetchComments, likeComment, unlikeComment, likeReply, unlikeReply } from '../actions/comments'
 
-
+// Passes the comment array as a props to the components
 const mapStateToProps = state => {
     return {
         comments: state
     }   
 }
 
+// Passes the reducers dispatch functions as a props to the components
 const mapDispatchToProps = dispatch => {
     return {
         addReply: (text, id) => dispatch(addReply(text, id)),

@@ -1,7 +1,9 @@
 import React from 'react'
 
+// Assets
 import profilepic from '../assets/profilepic.jpg'
 
+// Styles
 import '../styles/PostHeader.scss'
 
 const PostHeader = () => {

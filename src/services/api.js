@@ -1,4 +1,4 @@
-// Services to get from local storage
+// Services to get and save to and from local storage
 export const saveToStorage = commentList => {
     localStorage.setItem('comments', JSON.stringify(commentList))
 }
@@ -6,13 +6,4 @@ export const saveToStorage = commentList => {
 export const retrieveFromStorage = () => {
     let commentList = JSON.parse(localStorage.getItem('comments'))
     return commentList
-}
-
-export const getNumberofItemsinStorage = () => {
-    let commentList = JSON.parse(localStorage.getItem('comments'))
-    if(commentList === null) {
-        return 0
-    } else {
-        return commentList.length
-    }
 }

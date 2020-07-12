@@ -1,3 +1,7 @@
+/*
+    Generates a random string by choosing on of the characters provided using
+    Math.random() and appending the result to an 8-digit random string
+*/
 export const generateRandomString = () => {
     let result = ''
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
