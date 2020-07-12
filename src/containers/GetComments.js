@@ -1,5 +1,9 @@
 import { connect } from 'react-redux'
+
+// Components
 import Details from '../components/Details'
+
+// Actions
 import { addReply, fetchComments, likeComment, unlikeComment, likeReply, unlikeReply } from '../actions/comments'
 
 // Passes the comment array as a props to the components
