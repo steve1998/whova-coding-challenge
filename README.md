@@ -15,8 +15,12 @@ like / unlike comments, reply to comments, and like / unlike replied comments. T
 as a mock database for the comment section and the UI persists the comment section as well. The app also
 is responsive to different screen sizes. The reply bar however, doesn't work exactly as the original instagram 
 app. It adds a reply input below the reply section and has its own reply button. The comment section also scrolls
-down instead of going to a new page like the original instagram page (for mobile view). Other than these minor differences, 
-the app follows the specs of the instructions.
+down instead of going to a new page like the original instagram page (for mobile view). 
+
+Some minor additional features are
+also implemented:
+- Like the post (no persistent state)
+- Double click to like the post  (no persistent state)
 
 # How to Run
 Do `yarn install` and then `yarn start` to run it on `localhost:3000`. 
