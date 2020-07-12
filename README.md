@@ -19,8 +19,10 @@ down instead of going to a new page like the original instagram page (for mobile
 
 Some minor additional features are
 also implemented:
+(These are UI features only)
 - Like the post (no persistent state)
 - Double click to like the post  (no persistent state)
+- Bookmark post (no persistent state)
 
 # How to Run
 Do `yarn install` and then `yarn start` to run it on `localhost:3000`. 
