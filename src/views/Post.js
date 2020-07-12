@@ -37,6 +37,7 @@ import '../styles/Post.scss'
 const Post = () => {
     const[isMobile, setIsMobile] = useState(false)
     const[IsLiked, setIsLiked] = useState(false)
+    const[IsBookmarked, setIsBookmarked] = useState(false)
 
     useEffect(() => {
         window.addEventListener("resize", handleWindowResize)
@@ -56,6 +57,14 @@ const Post = () => {
         }   
     }
 
+    const handleBookmarkClicked = () => {
+        if (!IsBookmarked) {
+            setIsBookmarked(true)
+        } else {
+            setIsBookmarked(false)
+        } 
+    }
+
     return(
         isMobile ? (
             // Mobile view
@@ -67,7 +76,7 @@ const Post = () => {
                     <img src={post} alt="" onDoubleClick={handleLikeClicked} className="w-100 image"></img>
                 </div>
                 <div className="px-3 pt-2">
-                    <PostBar handleLikeClicked={handleLikeClicked} isLiked={IsLiked} />
+                    <PostBar handleLikeClicked={handleLikeClicked} isLiked={IsLiked} handleBookmarkClicked={handleBookmarkClicked} isBookmarked={IsBookmarked}/>
                      {/* This is the redux container */}
                     <GetComments />
                 </div>
@@ -98,7 +107,7 @@ const Post = () => {
                         </div>
                         <div className="pb-2 comment">
                             <div className="px-3">
-                                <PostBar handleLikeClicked={handleLikeClicked} isLiked={IsLiked}/>
+                                <PostBar handleLikeClicked={handleLikeClicked} isLiked={IsLiked} handleBookmarkClicked={handleBookmarkClicked} isBookmarked={IsBookmarked}/>
                             </div>
                             <hr></hr>
                             <div className="px-3">
