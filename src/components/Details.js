@@ -7,7 +7,7 @@ import Reply from './Reply'
 import { retrieveFromStorage, saveToStorage } from '../services/api'
 
 // Helpers
-import { getDate } from '../helpers/date'
+import { getDate, getTimeDifference } from '../helpers/date'
 
 // Styles
 import '../styles/Details.scss'
@@ -152,7 +152,7 @@ const Details = ({ comments, fetchComments, addReply, likeComment, unlikeComment
                                         <span className="pr-2">
                                         {
                                             // Calculates the timestamp of each comment
-                                            currentHour - comment.time < 1 ? (<span>Just now</span>) : (currentHour - comment.time + "h")
+                                            getTimeDifference(currentHour, comment.time) < 1 ? (<span>Just now</span>) : (currentHour - comment.time + "h")
                                         }
                                         </span>
                                         <span onClick={() => handleReply(comment.id)} className="semi-bold reply-button">Reply</span>
