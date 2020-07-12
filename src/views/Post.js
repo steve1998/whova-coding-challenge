@@ -36,6 +36,7 @@ import '../styles/Post.scss'
 
 const Post = () => {
     const[isMobile, setIsMobile] = useState(false)
+    const[IsLiked, setIsLiked] = useState(false)
 
     useEffect(() => {
         window.addEventListener("resize", handleWindowResize)
@@ -46,6 +47,15 @@ const Post = () => {
         setIsMobile(checkWindowSize())
     }
 
+    // Event handler for the post like button and double click (like button does not change data)
+    const handleLikeClicked = () => {
+        if (!IsLiked) {
+            setIsLiked(true)
+        } else {
+            setIsLiked(false)
+        }   
+    }
+
     return(
         isMobile ? (
             // Mobile view
@@ -54,10 +64,10 @@ const Post = () => {
                     <PostHeader />
                 </div>
                 <div className="d-flex flex-grow-1 image-container">
-                    <img src={post} alt="" className="w-100 image"></img>
+                    <img src={post} alt="" onDoubleClick={handleLikeClicked} className="w-100 image"></img>
                 </div>
                 <div className="px-3 pt-2">
-                    <PostBar />
+                    <PostBar handleLikeClicked={handleLikeClicked} isLiked={IsLiked} />
                      {/* This is the redux container */}
                     <GetComments />
                 </div>
@@ -73,7 +83,7 @@ const Post = () => {
             <div className="viewheight">
                 <div className="row no-gutters h-100">
                     <div className="col-8 d-flex">
-                        <img src={post} alt="" className="w-100 image"></img>
+                        <img onDoubleClick={handleLikeClicked} src={post} alt="" className="w-100 image"></img>
                     </div>
                     <div className="col-4 d-flex flex-column">
                         <div className="px-3">
@@ -88,7 +98,7 @@ const Post = () => {
                         </div>
                         <div className="pb-2 comment">
                             <div className="px-3">
-                                <PostBar />
+                                <PostBar handleLikeClicked={handleLikeClicked} isLiked={IsLiked}/>
                             </div>
                             <hr></hr>
                             <div className="px-3">

@@ -1,33 +1,21 @@
-import React, { useState } from 'react'
-
+import React from 'react'
 
 // Styles
 import '../styles/PostBar.scss'
 
-const PostBar = () => {
-    const[IsLiked, setIsLiked] = useState(false)
-
-    // Event handler for the post like button (like button does not change data)
-    const handleLikeClicked = () => {
-        if(!IsLiked) {
-            setIsLiked(true)
-        } else {
-            setIsLiked(false)
-        }
-    }
-
+const PostBar = props => {
     return(
         <div className="bar d-flex flex-row align-items-center justify-content-between pb-2">
             {/* Renders the logos for the bar above comments */}
             <div>
                 {
                     // Changes logo based on whether liked button is clicked or not
-                    IsLiked ? (
+                    props.isLiked ? (
                         <svg 
                         width="1.5em" 
                         height="1.5em" 
                         viewBox="0 0 16 16" 
-                        onClick={handleLikeClicked} 
+                        onClick={props.handleLikeClicked} 
                         className="bi bi-heart-fill mr-3" 
                         fill="currentColor" 
                         xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +28,7 @@ const PostBar = () => {
                         width="1.5em" 
                         height="1.5em" 
                         viewBox="0 0 16 16" 
-                        onClick={handleLikeClicked} 
+                        onClick={props.handleLikeClicked} 
                         className="bi bi-heart mr-3" 
                         fill="currentColor" 
                         xmlns="http://www.w3.org/2000/svg">
